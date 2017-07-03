@@ -85,6 +85,7 @@ public class FitPopupWindow extends PopupWindow implements PopupWindow.OnDismiss
         Window window = context.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.alpha = 0.7f;
+        window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
         window.setAttributes(lp);
 
     }
@@ -142,6 +143,7 @@ public class FitPopupWindow extends PopupWindow implements PopupWindow.OnDismiss
     public void onDismiss() {
         WindowManager.LayoutParams lp = context.getWindow().getAttributes();
         lp.alpha = 1f;
+        context.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
         context.getWindow().setAttributes(lp);
 
     }
